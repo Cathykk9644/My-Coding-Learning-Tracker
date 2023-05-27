@@ -5,7 +5,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 65%;
   box-sizing: border-box;
 }
 
@@ -68,7 +68,7 @@ p {
 
   background-color: white;
   padding: 6rem;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
 }
