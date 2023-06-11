@@ -70,6 +70,28 @@ restaurant.orderDelivery({
   address: 'Demot Vol 45',
 });
 
+// Topic E - Logical Opeartor Assignment
+// 1. ||= OR opeartor assignment: return 1st truthy value (NOT include 0, '', null & undefined)
+const rest1 = {
+  name: 'lalamove',
+  numGuest: 0,
+};
+
+const rest2 = {
+  name: 'natolia',
+  owner: 'via del 67',
+};
+
+// rest1.numGuest = rest1.numGuest || 10;
+// rest2.numGuest = rest2.numGuest || 10;
+
+// rest1.numGuest ||= 102;
+// rest2.numGuest ||= 102;
+
+// console.log(rest1, rest2);
+
+// 2. Nullish operator assignment: return null or undefined
+
 // Topic D - More about Logical Operator (&& AND ||)
 
 // Use ANY data type, return ANY data type, short-circuiting
@@ -92,6 +114,16 @@ restaurant.orderPasta && restaurant.orderPasta('apple', '0' & '0'); // if the fi
 restaurant.numGuest = 0;
 const guest3 = restaurant.numGuest ?? 78;
 console.log(guest3);
+
+// 4. AND: return the 1st falsy value
+// rest1.owner = rest1.owner && '<ANONYMOUS>';
+// rest2.owner = rest2.owner && '<ANONYMOUS>';
+
+rest1.owner &&= '<ANONYMOUS>';
+rest2.owner &&= '<ANONYMOUS>';
+
+console.log(rest1);
+console.log(rest2);
 
 // Real-world example
 const ingredients = [
