@@ -7,6 +7,7 @@ const flights =
 // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
+  // numGuest: 14,
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: [
@@ -68,6 +69,29 @@ restaurant.orderDelivery({
   mainIndex: 1,
   address: 'Demot Vol 45',
 });
+
+// Topic D - More about Logical Operator (&& AND ||)
+
+// Use ANY data type, return ANY data type, short-circuiting
+
+// 1. Short-circuiting for OR operator (||) : return the 1st truthy value
+console.log(0 || 'Catcat');
+
+const guest1 = restaurant.numGuest ? restaurant.numGuest : 99;
+console.log(guest1);
+const guest2 = restaurant.numGuest || 78;
+console.log(guest2);
+
+// 2. Short-circuiting for AND operator (&&): return the 1st falsy value
+console.log('hello' && 989 && '23' && 0);
+console.log('hello' && 989 && '23'); // if all the operand are ture, then return the last one
+
+restaurant.orderPasta && restaurant.orderPasta('apple', '0' & '0'); // if the first value is true, the 2nd value - the function will be execuated, the AND operator here replace functioanlity of IF STATEMENT
+
+// 3. Nullish: null and undefined (ES2020) (NOT 0 or '')
+restaurant.numGuest = 0;
+const guest3 = restaurant.numGuest ?? 78;
+console.log(guest3);
 
 // Real-world example
 const ingredients = [
