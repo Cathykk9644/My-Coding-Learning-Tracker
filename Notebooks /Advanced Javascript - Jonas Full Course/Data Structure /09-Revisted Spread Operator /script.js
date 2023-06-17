@@ -5,6 +5,26 @@ const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
 // Data needed for first part of the section
+
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const openingHours = {
+  // [weekdays[3]]
+  fri: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [`day-${4 + 2}`]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
+const orderRate = ['high', 'low', 'medium'];
+
 const restaurant = {
   name: 'Classico Italiano',
   // numGuest: 14,
@@ -19,22 +39,11 @@ const restaurant = {
   ],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
+  openingHours,
 
-  order: function (starterIndex, mainIndex, categoriesIndex) {
+  orderRate,
+
+  order(starterIndex, mainIndex, categoriesIndex) {
     return [
       this.starterMenu[starterIndex],
       this.mainMenu[mainIndex],
@@ -42,12 +51,7 @@ const restaurant = {
     ];
   },
 
-  orderDelivery: function ({
-    starterIndex = 0,
-    mainIndex = 0,
-    time = '19:30',
-    address,
-  }) {
+  orderDelivery({ starterIndex = 0, mainIndex = 0, time = '19:30', address }) {
     console.log(
       `Order already received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
@@ -69,6 +73,43 @@ restaurant.orderDelivery({
   mainIndex: 1,
   address: 'Demot Vol 45',
 });
+
+// Topic F - ES6 Features
+// 1. for of loop - mainly for return of current elements in iterables and can still use the keywords of break and continue
+const mergedMenu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(mergedMenu);
+for (const item of mergedMenu) console.log(item);
+
+for (const item of mergedMenu.entries()) {
+  console.log(item);
+}
+
+// 2. Enhanced Object Literal
+// A. Just use the variable names declared outside of object scope
+console.log(restaurant);
+// B. simpler syntax for creating a method attached to an object, refer to lines 44 and 50 for references
+// C. Compute property value in object
+
+// 3. ES2020 - Optional Chaining
+console.log(restaurant.openingHours.mon?.open);
+console.log(restaurant.openingHours?.mon?.open); // multiple optional chaining
+
+// Example
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+// Optional Chaining on Method
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderPljijoj?.(0, 1) ?? 'Method does not exist');
+
+// Optional Chaining on Array
+const users = [{ name: 'kkhui', email: '1333@kk.io' }];
+
+console.log(users[0]?.name ?? 'Not found email');
 
 // Topic E - Logical Opeartor Assignment
 // 1. ||= OR opeartor assignment: return 1st truthy value (NOT include 0, '', null & undefined)
